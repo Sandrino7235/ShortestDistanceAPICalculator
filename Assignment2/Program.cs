@@ -10,8 +10,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MapStateService>();
 builder.Services.AddSingleton<PathFindingService>();
 
-
 var app = builder.Build();
+
+// listen on Render's PORT
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://*:{port}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
